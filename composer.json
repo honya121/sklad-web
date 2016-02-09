@@ -1,0 +1,18 @@
+{
+	"name": "honya121/sklad-web",
+	"description": "Web interface for SMD storage device",
+	"type": "project",
+	"authors": [
+		{
+			"name": "Jan Priessnitz"
+		}
+	],
+	"require": {
+		"php": ">= 5.3.1",
+		"nette/nette": "~2.3.0",
+		"mesour/datagrid": "v2.0.7.1"
+	},
+	"require-dev": {
+		"nette/tester": "~1.3"
+	}
+}
