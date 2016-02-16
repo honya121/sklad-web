@@ -11,7 +11,7 @@ class HomepagePresenter extends BasePresenter
 
 	public function renderDefault()
 	{
-        
+        $this->template->user = $this->userFacade->getUser();
 	}
 
 }
