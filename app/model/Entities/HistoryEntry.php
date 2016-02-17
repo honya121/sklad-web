@@ -3,14 +3,15 @@
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Nette;
 
 /**
  * @ORM\Entity(repositoryClass="App\Model\Repository\HistoryRepository")
  */
-class HistoryEntry
+class HistoryEntry extends Nette\Object
 {
     /**
-     * @ORM\Id @ORM\Column(type="integer")
+     * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
      */
     private $id;
     

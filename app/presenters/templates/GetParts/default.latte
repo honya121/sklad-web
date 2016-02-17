@@ -1,0 +1,20 @@
+{block content}
+
+<h1>Vybrat součástky</h1>
+<br>
+{form getPartsForm class => "form-horizontal"}
+<table class="table">
+<thead>
+<tr>
+<td>Součástka</td><td>Celkem / Možné vybrat</td><td><div class="col-xs-3">Množství</div></td><td></td>
+</tr>
+</thead>
+<tbody>
+{foreach $sockets as $socket}
+<tr>
+<td>{$socket['part']['name']}</td><td>{$socket['amount']} / {$socket['available']}</td><td><div class="col-xs-3"><input class="form-control" n:name="'amount_'.$socket['id']" value="0"></div></td><td><button class="btn btn-success" n:name="'submit_'.$socket['id']">Vybrat</button></td>
+</tr>
+{/foreach}
+</tbody>
+</table>
+{/form}

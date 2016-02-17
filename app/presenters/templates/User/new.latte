@@ -1,0 +1,40 @@
+{block content}
+<h1>Nový uživatel</h1>
+<br>
+{form newUserForm class => 'form-horizontal'}
+<div class="form-group">
+    <label n:name="username" class="col-md-2 control-label">Uživatelské jméno</label>
+    <div class="col-md-3">
+        <input n:name="username" class="form-control">
+    </div>
+</div>
+<div class="form-group">
+    <label n:name="password" class="col-md-2 control-label"> Heslo</label>
+    <div class="col-md-3">
+        <input n:name="password" class="form-control">
+    </div>
+</div>
+<div class="form-group">
+    <label n:name="name" class="col-md-2 control-label">Jméno</label>
+    <div class="col-md-3">
+        <input n:name="name" class="form-control">
+    </div>
+</div>
+<div class="form-group">
+    <label n:name="email" class="col-md-2 control-label">Email</label>
+    <div class="col-md-3">
+        <input n:name="email" class="form-control">
+    </div>
+</div>
+<div class="form-group">
+    <label n:name="role" class="col-md-2 control-label">Role</label>
+    <div class="col-md-3">
+        <select n:name="role" class="form-control"></select>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-offset-2">
+        <input n:name="submit" class="form-control">
+    </div>
+</div>
+{/form}

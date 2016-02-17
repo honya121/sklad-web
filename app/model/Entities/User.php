@@ -3,14 +3,16 @@
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Nette;
 
 /**
  * @ORM\Entity(repositoryClass="App\Model\Repository\UserRepository")
  */
-class User
+class User extends Nette\Object
 {
     /**
      * @ORM\Id @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
     

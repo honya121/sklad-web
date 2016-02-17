@@ -12,18 +12,86 @@
 
 	<link rel="stylesheet" href="{$basePath}/css/style.css">
 	<meta name="viewport" content="width=device-width">
+    
+    <!--Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
 	{block head}{/block}
 </head>
 
 <body>
+    {if $user->isLoggedIn()}
+	<!-- Menu -->
+	<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+	<div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" n:href="Homepage:default">Sklad</a>
+    </div>
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	<ul class="nav navbar-nav">
+	<!-- <li><a n:href="GetParts:default">Vydat součástky</a></li> -->
+	<li class="btn-info"><a n:href="Queue:list">F</a></li>
+	<li>
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Vybrat součástky<span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu" role="menu">
+	<li><a n:href="GetParts:default">Vybrat</a></li>
+	</ul>
+	</li>
+	<li><a n:href="History:default">Historie</a></li>
+	<!--
+	<li><a n:href="Socket:fill">Doplnit součástky</a></li>
+	<li><a n:href="Part:new">Nová součástka</a></li>
+	<li><a n:href="PartList:default">Seznam součástek</a></li>
+	</ul>-->
+	<li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Spravovat přihrádky<span class="caret"></span></a>
+	<ul class="dropdown-menu" role="menu">
+	{if $user->isInRole('manager') or $user->isInRole('admin')}<li><a n:href="Socket:fill">Doplnit součástky v přihrádkách</a></li>{/if}
+	<li><a n:href="Socket:list">Seznam přihrádek</a></li>
+	</ul>  
+	</li>
+	<li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Spravovat součástky<span class="caret"></span></a>
+	<ul class="dropdown-menu" role="menu">
+	<li><a n:href="Part:list">Seznam součástek</a></li>
+	{if $user->isInRole('manager') or $user->isInRole('admin')}<li><a n:href="Part:new">Nová součástka</a></li>{/if}
+	</ul>
+	</li>
+	<li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Nastavení<span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+      <li><a n:href="User:changePassword">Změnit heslo</a><li>
+      {if $user->isInRole('admin')}
+        <li><a n:href="User:list">Seznam uživatelů</a></li>
+        <li><a n:href="User:new">Nový uživatel</a></li>
+      {/if}
+    </ul>
+	</ul>
+	<ul class="nav navbar-nav navbar-right">
+	<li><a n:href='Login:logout'>Log out</a></li>
+	</ul>
+	</div>
+	</div>
+	</nav>
+	{/if}
+    
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
-
+    <div class="container">
 	{include content}
-
+    </div>
 	{block scripts}
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="//nette.github.io/resources/js/netteForms.min.js"></script>
 	<script src="{$basePath}/js/main.js"></script>
+    
+    <!--Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 	{/block}
 </body>
 </html>

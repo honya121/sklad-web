@@ -1,0 +1,32 @@
+{block content}
+<h1>Nová součástka</h1>
+<br>
+{form newPartForm class => 'form-horizontal'}
+<div class="form-group">
+    <label n:name="name" class="col-md-2 control-label">Název</label>
+    <div class="col-md-4">
+        <input n:name="name" class="form-control">
+    </div>
+</div>
+<div class="form-group">
+    <label n:name="width" class="col-md-2 control-label">Šířka</label>
+    <div class="col-md-1">
+        <input n:name="width" class="form-control">
+    </div>
+    <label n:name="length" class="col-md-1 control-label">Délka</label>
+    <div class="col-md-1">
+        <input n:name="length" class="form-control">
+    </div>
+</div>
+<div class="form-group">
+    <label n:name="description" class="col-md-2 control-label">Popis</label>
+    <div class="col-md-6">
+        <input n:name="description" class="form-control">
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-2">
+        <input n:name="submit" class="form-control"> 
+    </div>   
+</div>
+{/form}

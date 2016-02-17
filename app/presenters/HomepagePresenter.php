@@ -11,7 +11,15 @@ class HomepagePresenter extends BasePresenter
 
 	public function renderDefault()
 	{
-        $this->template->user = $this->userFacade->getUser();
+        if($this->user->isLoggedIn())
+        {
+            $this->redirect('GetParts:default');
+        }
+        else
+        {
+            $this->flashMessage('Nejste přihlášeni');
+            $this->redirect('Login:default');
+        }
 	}
 
 }

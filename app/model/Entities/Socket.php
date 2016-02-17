@@ -3,14 +3,15 @@
 namespace App\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Nette;
 
 /**
  * @ORM\Entity(repositoryClass="App\Model\Repository\SocketRepository")
  */
- class Socket
+class Socket extends Nette\Object
  {
     /**
-     * @ORM\Id @ORM\Column(type="integer")
+     * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
      */
     private $id;
     
@@ -33,6 +34,11 @@ use Doctrine\ORM\Mapping as ORM;
      * @ORM\Column(type="integer")
      */
     private $amount;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $available;
     
     /**
      * @ORM\OneToMany(targetEntity="QueueEntry", mappedBy="socket")
@@ -66,7 +72,7 @@ use Doctrine\ORM\Mapping as ORM;
     {
         return $this->part;
     }
-    public function setPart(Part $part)
+    public function setPart(Part $part = null)
     {
         $this->part = $part;
     }
@@ -80,6 +86,14 @@ use Doctrine\ORM\Mapping as ORM;
         $this->amount = $amount;
     }
     
+    public function getAvailable()
+    {
+        return $this->available;
+    }
+    public function setAvailable($available)
+    {
+        $this->available = $available;
+    }
     public function getQueueEntries()
     {
         return $this->queueEntries;

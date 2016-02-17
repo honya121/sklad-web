@@ -20,6 +20,7 @@ session:
 
 
 services:
+    authenticator: App\Model\UserManager
     - App\Model\Facade\HistoryFacade
     - App\Model\Facade\PartFacade
     - App\Model\Facade\QueueFacade

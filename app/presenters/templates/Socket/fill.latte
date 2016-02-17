@@ -1,0 +1,29 @@
+{block content}
+<h1>Doplnit součástky</h1>
+<br>
+<form n:name="fillSocketForm">
+<table class="table">
+<thead>
+    <tr>
+        <td>Součástka</td>
+        <td>Pozice</td>
+        <td>Patro</td>
+        <td>Počáteční stav</td>
+        <td>Koncový stav</td>
+        <td></td>
+    </tr>
+</thead>
+<tbody>
+{foreach $sockets as $socket}
+<tr>
+    <td>{$socket['part']['name']}</td>
+    <td>{$socket['position']}</td>
+    <td>{$socket['level']}</td>
+    <td>{$socket['amount']}</td>
+    <td><div class="col-xs-3"><input class="form-control" n:name="'amount_'.$socket['id']"></div></td>
+    <td><button class="btn btn-success" n:name="'submit_'.$socket['id']">Doplnit</button></td>
+</tr>
+{/foreach}
+</tbody>
+</table>
+</form>
