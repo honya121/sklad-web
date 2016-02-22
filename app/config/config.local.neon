@@ -1,0 +1,14 @@
+parameters:
+
+
+database:
+	dsn: 'mysql:localhost;dbname=sklad'
+	user:	root
+	password: qweasd
+	options:
+		lazy: yes
+
+doctrine:
+    user: root
+    password: qweasd
+    dbname: sklad-orm
