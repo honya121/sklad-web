@@ -48,3 +48,23 @@ form .error {
 	color: #D00;
 	font-weight: bold;
 }
+
+.grid-column-available {
+    width: 90px;
+}
+
+.grid-column-socketPosition {
+    width: 80px;
+}
+
+.grid-column-Vybrat {
+    width: 80px;
+}
+
+.getPartsButton {
+  float: right;
+}
+
+.disabled {
+    pointer-events: none;
+}

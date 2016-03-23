@@ -4,9 +4,7 @@ namespace App\Presenters;
 
 use Nette;
 use App\Model;
-use Mesour\DataGrid\Grid,
-    Mesour\DataGrid\Components\Link,
-    Mesour\DataGrid\ArrayDataSource;
+use Mesour;
 
 
 class QueuePresenter extends BasePresenter
@@ -19,7 +17,7 @@ class QueuePresenter extends BasePresenter
             $this->redirect('Login:default');
         }
     }
-    
+
     public function actionDelete($queueEntryId)
     {
         if(!$this->user->isLoggedIn())
@@ -30,16 +28,17 @@ class QueuePresenter extends BasePresenter
         $this->flashMessage('Záznam byl z fronty úspěšně vymazán');
         $this->redirect('Queue:list');
     }
-    
+
     public function createComponentQueueListGrid($name)
     {
-        $source = new ArrayDataSource($this->queueFacade->getQueueTable());
-        $grid = new Grid($this, $name);
-        
+        $gridControl = new Model\Mesour\EmptyGridControl($this, $name);
+        $source = new Mesour\DataGrid\Sources\ArrayGridSource($this->queueFacade->getQueueTable());
+        $grid = $gridControl->grid;
+
         $primaryKey = 'id';
         $grid->setPrimaryKey($primaryKey);
-        $grid->setDataSource($source);
-        
+        $grid->setSource($source);
+
         $grid->addNumber('state', 'Stav');
         $grid->addText('user_username', 'Uživatel');
         $grid->addText('part_name', 'Součástka');
@@ -48,14 +47,15 @@ class QueuePresenter extends BasePresenter
         $grid->addNumber('amount', 'Počet');
         $grid->addDate('created', 'Vytvořeno')
             ->setFormat('j.n.Y H:m:s');
-        
-        $actions = $grid->addActions('');
-        
-        $actions->addButton()
-            ->setType('btn-danger')
+
+        $link = new Mesour\Bridges\Nette\Link($this);
+        $actions = $grid->addContainer('actions', ' ');
+
+        $actions->addButton('delete')
+            ->setType('danger')
             ->setText('Vymazat')
-            ->setAttribute('href', new Link('Queue:delete', array('queueEntryId' => '{'.$primaryKey.'}')));
-       
-        return $grid;
+            ->setAttribute('href', $link->create('Queue:delete', array('queueEntryId' => '{id}')));
+
+        return $gridControl->create();
     }
 }

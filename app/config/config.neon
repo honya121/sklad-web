@@ -33,6 +33,7 @@ extensions:
     events: Kdyby\Events\DI\EventsExtension
     annotations: Kdyby\Annotations\DI\AnnotationsExtension
     doctrine: Kdyby\Doctrine\DI\OrmExtension
+    mesourApplication: Mesour\Bridges\Nette\DI\ApplicationExtension
 
 doctrine:
     user: doctrine
@@ -40,3 +41,6 @@ doctrine:
     dbname: doctrine_online
     metadata:
         App: %appDir%
+
+mesourApplication:
+    name: 'skladweb'

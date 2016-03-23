@@ -14,42 +14,42 @@ class Socket extends Nette\Object
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
      */
     private $id;
-    
+
     /**
      * @ORM\Column(type="integer")
      */
     private $level;
-    
+
     /**
      * @ORM\Column(type="integer")
      */
     private $position;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Part", inversedBy="sockets")
      */
     private $part;
-    
+
     /**
      * @ORM\Column(type="integer")
      */
     private $amount;
-    
+
     /**
      * @ORM\Column(type="integer")
      */
     private $available;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="QueueEntry", mappedBy="socket")
      */
     private $queueEntries;
-    
+
     public function getId()
     {
         return $this->id;
     }
-    
+
     public function getLevel()
     {
         return $this->level;
@@ -58,7 +58,7 @@ class Socket extends Nette\Object
     {
         $this->level = $level;
     }
-    
+
     public function getPosition()
     {
         return $this->position;
@@ -67,7 +67,7 @@ class Socket extends Nette\Object
     {
         $this->position = $position;
     }
-    
+
     public function getPart()
     {
         return $this->part;
@@ -76,7 +76,7 @@ class Socket extends Nette\Object
     {
         $this->part = $part;
     }
-    
+
     public function getAmount()
     {
         return $this->amount;
@@ -85,7 +85,7 @@ class Socket extends Nette\Object
     {
         $this->amount = $amount;
     }
-    
+
     public function getAvailable()
     {
         return $this->available;

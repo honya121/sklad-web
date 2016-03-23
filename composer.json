@@ -7,11 +7,16 @@
 			"name": "Jan Priessnitz"
 		}
 	],
+	"minimum-stability": "beta",
 	"require": {
 		"php": ">= 5.3.1",
 		"nette/nette": "~2.3.0",
-		"mesour/datagrid": "v2.0.7.1",
-		"kdyby/doctrine": "^3.0"
+		"mesour/datagrid": "3.0.*@beta",
+		"kdyby/doctrine": "^3.0",
+		"tomaj/nette-bootstrap-form": "^1.2",
+		"mesour/array-manager": "^3.0@beta",
+		"mesour/nette-bridges": "^3.0@beta",
+		"nextras/datagrid": "^2.1"
 	},
 	"require-dev": {
 		"nette/tester": "~1.3"

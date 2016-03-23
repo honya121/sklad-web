@@ -25,7 +25,7 @@ class LoginPresenter extends BasePresenter
             $this->redirect('Homepage:default');
         }
 	}
-    
+
     public function createComponentLoginForm()
     {
         $form = new Nette\Application\UI\Form;
@@ -40,6 +40,8 @@ class LoginPresenter extends BasePresenter
     }
     public function loginFormSucceeded($form)
 	{
+    $this->user->setExpiration('14 days', FALSE);
+    
 		$values = $form->getValues();
 		if ($values->remember) {
 			$this->getUser()->setExpiration('14 days', FALSE);

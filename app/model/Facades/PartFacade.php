@@ -4,18 +4,19 @@ namespace App\Model\Facade;
 
 use Doctrine\ORM\EntityManager;
 use App\Model\Entity;
+use App\Model\Service;
 
 class PartFacade
 {
     private $em;
     private $repository;
- 
+
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
         $this->repository = $em->getRepository('App\Model\Entity\Part');
     }
-    
+
     public function get($id)
     {
         return $this->repository->find($id);
@@ -36,7 +37,15 @@ class PartFacade
         }
         return $partsArray;
     }
-    
+
+    public function getSimpleGetPartsTable()
+    {
+        $socketRepository = $this->em->getRepository('App\Model\Entity\Socket');
+        $sockets = $socketRepository->findOccupied();
+        $partService = new Service\PartService();
+        return $partService->rowsToSimpleTable($sockets);
+    }
+
     public function addPart($data)
     {
         $part = new Entity\Part;

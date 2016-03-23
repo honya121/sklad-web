@@ -9,22 +9,26 @@ class QueueFacade
 {
     private $repository;
     private $em;
-    
+
     public function __construct(EntityManager $em)
     {
         $this->repository = $em->getRepository('App\Model\Entity\QueueEntry');
         $this->em = $em;
     }
-    
+
     public function get($id)
     {
         return $this->repository->find($id);
     }
-    
-    public function request(Entity\Socket $socket,
-                            Entity\User $user,
+
+    public function request($socketPos,
+                            $userId,
                             $amount)
     {
+        $socketRepository = $this->em->getRepository('App\Model\Entity\Socket');
+        $userRepository = $this->em->getRepository('App\Model\Entity\User');
+        $socket = $socketRepository->findOneBy(array('position' => $socketPos));
+        $user = $userRepository->find($userId);
         $entry = new Entity\QueueEntry;
         $entry->state = 0;
         $entry->created = new DateTime('now');
@@ -33,11 +37,11 @@ class QueueFacade
         $entry->socket = $socket;
         $entry->amount = $amount;
         $this->em->persist($entry);
-        
+
         $socket->available -= $amount;
-        
+
         $this->em->flush();
-        
+
     }
     public function getQueueTable()
     {
@@ -61,15 +65,15 @@ class QueueFacade
         }
         return $queueTable;
     }
-    
+
     public function deleteQueueEntry($queueEntryId)
     {
         $queueEntry = $this->get($queueEntryId);
-        
+
         $queueEntry->socket->available += $queueEntry->amount;
-        
+
         $this->em->remove($queueEntry);
         $this->em->flush();
     }
-    
+
 }

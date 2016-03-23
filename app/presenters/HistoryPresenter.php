@@ -4,9 +4,7 @@ namespace App\Presenters;
 
 use Nette;
 use App\Model;
-use Mesour\DataGrid\Grid,
-    Mesour\DataGrid\Components\Link,
-    Mesour\DataGrid\ArrayDataSource;
+use Mesour;
 
 
 class HistoryPresenter extends BasePresenter
@@ -19,7 +17,7 @@ class HistoryPresenter extends BasePresenter
             $this->redirect('Login:default');
         }
     }
-    
+
     public function renderStatistics()
     {
         if(!$this->user->isLoggedIn())
@@ -27,18 +25,20 @@ class HistoryPresenter extends BasePresenter
             $this->redirect('Login:default');
         }
     }
-    
+
     public function createComponentHistoryGrid($name)
     {
-        $source = new ArrayDataSource($this->historyFacade->getHistoryTable());
-        $grid = new Grid($this, $name);
-        
+        $gridControl = new Model\Mesour\EmptyGridControl($this, $name);
+        $grid = $gridControl->grid;
+
+        $source = new Mesour\DataGrid\Sources\ArrayGridSource($this->historyFacade->getHistoryTable());
+
         $primaryKey = 'id';
         $grid->setPrimaryKey($primaryKey);
-        $grid->setDataSource($source);
+        $grid->setSource($source);
         $grid->setDefaultOrder('id', 'DESC');
-        
-        $grid->addText('type', '');
+
+        $grid->addText('type', ' ');
         $grid->addNumber('state', 'Stav');
         $grid->addText('user', 'Uživatel');
         $grid->addText('part', 'Součástka');
@@ -47,7 +47,7 @@ class HistoryPresenter extends BasePresenter
         $grid->addNumber('amount', 'Počet');
         $grid->addDate('created', 'Čas')
             ->setFormat('j.n.Y H:m:s');
-        
-        return $grid;
+
+        return $gridControl->create();
     }
 }
