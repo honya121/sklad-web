@@ -20,9 +20,21 @@ class QueuePresenter extends BasePresenter
 
     public function actionDelete($queueEntryId)
     {
-        if(!$this->user->isLoggedIn())
-        {
+        if(!$this->user->isLoggedIn()) {
             $this->redirect('Login:default');
+        }
+        else {
+          $queueEntry = $this->queueFacade->get($queueEntryId);
+          if($this->user->isInRole('manager') or $this->user->isInRole('admin')
+            or $this->user->id == $queueEntry->user->id) {
+              $this->queueFacade->deleteQueueEntry($queueEntryId);
+              $this->flashMessage('Záznam byl z fronty úspěšně vymazán');
+              $this->redirect('Queue:list');
+            }
+          else {
+            $this->flashMessage('Pro tuto akci nemáte oprávnění');
+            $this->redirect('Queue:list');
+          }
         }
         $this->queueFacade->deleteQueueEntry($queueEntryId);
         $this->flashMessage('Záznam byl z fronty úspěšně vymazán');
